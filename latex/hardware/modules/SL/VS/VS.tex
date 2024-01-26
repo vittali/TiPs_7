@@ -1,0 +1,25 @@
+\subsection{Voltage Supervisor (VS)}
+
+The Voltage Supervisor Module (VS) keeps the \mu S in reset as long as the supply voltage
+undershoots or overshoots the recommended operating conditions. When the master switches on
+the slave power supply, a certain voltage drop is to be expected due to inrush current.
+This drop increases as the battery charge decreases. Furthermore, the drop depends on the
+ambient temperature. VS ensures that \mu S does not attempt to boot until
+the supply voltage has recovered. Failing to do so could lead to undefined behavior.
+
+\subsubsection{Requirements}
+
+VS must be suitable for \SI{3.3}{\volt} systems.
+
+\subsubsection{Implementation}
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{SL/VS/VS}
+    % \caption{WD - schematic}
+\end{figure}
+
+\input{hardware/modules/SL/VS/VS_pm}
+\input{hardware/modules/SL/VS/VS_BOM}
+\clearpage

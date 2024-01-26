@@ -1,0 +1,26 @@
+\begin{table}[H]
+    \centering
+    \begin{threeparttable}[b]
+        \begin{tabularx}{\linewidth}{
+                >{\hsize=0.25\hsize}X
+                >{\hsize=0.75\hsize}X
+                >{\hsize=1.25\hsize}X
+                >{\hsize=0.5\hsize}X
+                >{\hsize=2.25\hsize}X
+            }
+            Id    & Desc                         & Order Code       & Package & Rationale                                         \\
+            \midrule
+            $U_1$ & \cite{noauthor_tps3431_2018} & TPS3431SDRBR/681 & VSON-8  & wide range of timeout values\tnote{1}             \\
+            $R_p$ & 100k                         & generic          & 0603    & pull-up resistor\tnote{2}                         \\
+            $C_c$ & \SI{100}{\nF}, \SI{16}{\V}   & generic          & 0603    & value for \approx \SI{8}{\s} timeout\tnote{3}     \\
+            $C_b$ & \SI{100}{\nF}, \SI{16}{\V}   & generic          & 0402    & bypass cap, optional but recommended in datasheet \\
+        \end{tabularx}
+        \begin{tablenotes}
+            \item [1] and low quiescent current, active-low open drain output suitable for Arduino dev board.
+            \item [2] see \cite{noauthor_tps3431_2018}, 8.2.2.1 Calculating WDO Pullup Resistor Design 1.
+            \item [3] see \cite{noauthor_tps3431_2018}, table 8-3.
+        \end{tablenotes}
+    \end{threeparttable}[b]
+    \caption{WD Module - BOM}
+    \label{table:wd1}
+\end{table}

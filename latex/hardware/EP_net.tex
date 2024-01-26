@@ -1,0 +1,28 @@
+
+\begin{table}[H]
+    \centering
+    \begin{threeparttable}[b]
+        \begin{tabularx}{\linewidth}{ >{\hsize=0.15\hsize}X > {\hsize=0.15\hsize}X > {\hsize=0.25\hsize}X >{\hsize=3.45\hsize}X}
+            Id & Rank & Name                   & Net description                                                                            \\
+            \midrule
+            1  & 5    & S\textsubscript{1}     & solar panel 1, positive output voltage                                                     \\
+            2  & 5    & S\textsubscript{2}     & solar panel 2, positive output voltage                                                     \\
+            3  & 5    & S\textsubscript{1'}    & V\textsubscript{s1}  protected against overvoltage                                         \\
+            4  & 5    & S\textsubscript{2'}    & V\textsubscript{s1}  protected against overvoltage                                         \\
+            17 & 5    & S\textsubscript{'\lor} & S\textsubscript{1'} OR S\textsubscript{2'}, OR-ing of dual solar power sources             \\
+            5  & 2    & 5V                     & USB compatible charger output                                                              \\
+            6  & 1    & B                      & battery voltage                                                                            \\
+            6  & 1    & B'                     & scaled down battery voltage for \SI{3.3}{\V} A/D conversion                                \\
+            7  & 3    & V\textsubscript{\mu M} & supply voltage  for master microcontroller (\mu M) controlled by the Power Module (PO).    \\
+            8  & 6    & S\textsubscript{1'c}   & scaled down V\textsubscript{s1'} for \SI{3.3}{\V} A/D conversion                           \\
+            9  & 6    & S\textsubscript{2'c}   & scaled down V\textsubscript{s2'} for \SI{3.3}{\V} A/D conversion                           \\
+            10 & 2    & \texttt{SDA}           & slave: I2C data                                                                            \\
+            11 & 2    & \texttt{SCL}           & slave: I2C clock                                                                           \\
+            12 & 2    & V\textsubscript{\mu S} & supply voltage for slave microcontroller                                                   \\
+            13 & 2    & \texttt{CON}           & slave: are slave I2C bus and master I2C  connected ?                                       \\
+            14 & 2    & \texttt{ACK}           & slave: is slave  ready to receive I2C data from master   ?                                 \\
+            15 & 2    & V\textsubscript{OS}    & supply voltage for Optical Switch (OS) module controlled by \mu M.                         \\
+            16 & 2    & Prx                    & optical sensor output voltage (position of water meter tally) for A/D conversion by \mu C. \\
+        \end{tabularx}
+    \end{threeparttable}
+\end{table}

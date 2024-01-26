@@ -1,0 +1,25 @@
+\begin{table}[H]
+    \centering
+    \begin{threeparttable}[b]
+        \begin{tabularx}{\linewidth}{ >
+                    {\hsize=.25\hsize}X >
+                    {\hsize=0.5\hsize}X >
+                    {\hsize=.25\hsize}X  >
+                    {\hsize=.5\hsize}X >
+                    {\hsize=.25\hsize}X  >
+                    {\hsize=3\hsize}X
+            }
+                  & \multicolumn{4}{c}{Pin mapping} &                                                                                      \\
+            \cmidrule(lr){3-6}
+            Id    & Net                             & Nb. & Name                          & Type            & Function                     \\
+            \midrule
+            $U_1$ & .3V3                            & 1   & \texttt{SENSE}                & \leftsquigarrow &                              \\
+            $U_1$ & \Gnd                            & 2   & \texttt{GND}                  & \Gnd            &                              \\
+            $U_1$ & \neg MR                         & 3   & \texttt{\textoverline{MR}}    & \leftharpoonup  & manual reset                 \\
+            $U_1$ & .3V3                            & 4   & \texttt{VDD}                  & \leftarrow      &                              \\
+            $U_1$ & CT                              & 5   & \texttt{CT}                   & \leftsquigarrow & adjustable reset  delay time \\
+            $U_1$ & \neg RS                         & 6   & \texttt{\textoverline{RESET}} & \leftharpoonup  & reset output open drain      \\
+        \end{tabularx}
+    \end{threeparttable}
+    % \caption{VS - pin mapping}
+\end{table}

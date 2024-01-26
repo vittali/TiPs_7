@@ -1,0 +1,313 @@
+\chapter{Software}
+
+The software consists of several components:
+\begin{enumerate}
+
+    \item firmware for \mu M and \mu S.
+    \item server (Linux daemon) for data retrieval and storage.
+    \item command line tools for post-processing and reporting.
+\end{enumerate}
+
+
+\section{Firmware}
+
+The firmware consists of two separate programs that are loaded (flashed) on the master and the slave microcontroller.
+Both programs share a set of libraries that provide common functions like logging and user I/O.
+Both subsystems write diagnostic data to a SD-card that can be used for debugging.
+
+
+\subsection{Master firmware}
+
+The master has the following tasks:
+
+\begin{enumerate}
+    \item after startup, request the current internet time from the slave
+    \item then start incrementing the flow counter based on the voltage readings from the IR opto switch
+    \item at a given time - currently at 12pm - transmit the data to the slave for upload to the MQTT broker
+    \item while waiting for the upload to succeed, continue incrementing the flow counter
+    \item if the slave acknowledges a successful upload, reset the counter and continue
+    \item if the slave does not succeed, retry later and continue
+\end{enumerate}
+
+Let us further detail  these tasks.
+
+
+
+
+At the end of the startup routine the following conditions hold:
+\begin{itemize}
+    \item [-] the \hyperref[sec:WD]{Watchdog Module (WM)} is enabled (.MA.WD.EWD = H).
+    \item [-] the  \hyperref[sec:SL]{Slave Module ((\mu S))} is powered of (.MA.SS.ESS = L).
+\end{itemize}
+
+The master then goes into power-saving sleep mode and wakes up every $n$ seconds to perform the following actions:
+\begin{itemize}
+    \item [-] toggle MA.WD.\neg RS to prevent a watchdog timeout and a subsequent reset.
+    \item [-] read the analog opacity level from module OS with the following sequence: \\
+          .MA.OD.EOD = L, read analog input MA.OD.Prx, .MA.OD.EOD = H.
+    \item [-] read the digital input MA.BI.CON' to check if the slave is ready to receive commands via the I2C bus.
+\end{itemize}
+
+
+
+
+
+\subsubsection{Internet Time}
+
+Accurate time is required for logging (timestamp) and to initiate the transmission request at a specific time.
+The time is updated only at startup, there will be some drift over time based on the stability of the microcontroller RTC.
+This is acceptable for this application.
+
+\subsubsection{Robust sensor reading}
+\label{sec:rsr}
+
+The voltage read from the IR opto switch oscillates between a maximum and minimum voltage.
+To increase robustness with respect to noise, a lower and higher threshold are chosen. Further, a hysteresis function
+must be applied to avoid erroneous transitions in between the maximum/minimum values.
+The question is now how to choose the lower and upper thresholds as well as the hysteresis.
+As explained in chapter \ref{sec:osd} the sensor readings are subject to drift and it is therefore desirable to
+increase the current through the sensor to decrease the impact of drift by widening the gap between lower and
+higher threshold. This however, increases power consumption. From the perspective of power consumption,
+it would therefore be optimal to drive just enough current through the sensor to allow for unambiguous discrimination
+of upper and lower thresholds.
+
+To mitigate the effect of drift, we use an averaging algorithm that constantly adjusts the upper and lower thresholds:
+
+
+\par\noindent\rule{\textwidth}{0.4pt}
+
+\begin{figure}[h]
+    \centering
+
+
+    \begin{algorithmic}
+        \State $current_{min} \gets high_{rail}$
+        \Comment{upper rail, Vcc, supply voltage}
+        \State $current{max} \gets low_{rail}$
+        \Comment{lower rail, Gnd, 0 V}
+        \State $\text{lower threshold breached} \gets false$
+        \Comment{have we already seen the lower threshold ?}
+        \Loop
+        \Comment{every second}
+        \State $current \gets A_0$
+        \State $current_{min} \gets min(current, current_{min})$
+        \Comment{search for new min}
+        \State $current_{max} \gets max(current, current_{max})$
+        \Comment{search for new max}
+        \If{$n\pmod{N} = 0$}
+        \Comment {every Nth invocation}
+        \State update $low$
+        \Comment {apply hysteresis}
+        \State update $high$
+        \Comment {apply hysteresis}
+        \State $current{min} \gets high_{rail}$
+        \Comment {reset}
+        \State $current{max} \gets low_{rail}$
+        \Comment {reset}
+        \EndIf
+        \If {$(current < low)$ $(\wedge$ $\neg$ \text{lower threshold breached})}
+        \State inc
+        \BoxedString[fill=yellow]{counter}
+        \State $\text{lower threshold breached} \gets true$
+        \ElsIf {$current > high$}
+        \State $\text{lower threshold breached} \gets false$
+        \EndIf
+        \EndLoop
+
+    \end{algorithmic}
+    \caption{Adaptive threshold algorithm}
+\end{figure}
+
+\subsubsection{Power sensitive operation}
+
+Upload only if battery voltage is high enough.
+
+\subsubsection{Master Slave communication}
+
+The I2C bus is used for bidirectional communication with the help of the Arduino \texttt{Wire} library:
+
+\begin{enumerate}
+    \item the master, during startup initializes the bus with a call to \texttt{Wire.begin()}.
+    \item the slave, during startup joins the bus with a free I2C address \texttt{Wire.begin(address)}.
+    \item the slave installs event handlers to receive data and to receive requests to send data.
+    \item the slave interconnects \texttt{SDA} and \texttt{SCL} between master and slave by pulling up $D_0$.
+    \item the master - and only the master - initiates the communication by either sending data with \texttt{Wire.write(data)}
+          or requesting data with \texttt{Wire.requestFrom(address,nb of bytes)}.
+\end{enumerate}
+
+
+
+\subsection{Slave firmware}
+
+At specific points in time, the master transmits the meter reading to the slave for upload to a MQTT broker.
+Currently, the time interval is fixed (every 24 hours) but a more sophisticated strategy would be to make
+this interval dependent on the current charge level of the battery. That is in summer - where leaks are more disturbing and
+energy is plentiful - more frequent transmissions could be scheduled than in winter where the conditions and
+requirements are
+very different.
+
+In our remote environment with relatively pour radio coverage we have found it challenging to upload data via
+General packet radio service (GPRS).
+Firstly, connection attempts frequently fail and no data is transmitted at all.
+Secondly, the Arduino \texttt{MQTT} library might return one of the following error codes despite the fact
+that the upload has been successful:
+
+(This was with Qos = 1 )
+
+\begin{minted}{c}
+LWMQTT_NETWORK_FAILED_CONNECT = -3,
+LWMQTT_NETWORK_TIMEOUT = -4,
+LWMQTT_NETWORK_FAILED_READ = -5,
+LWMQTT_MISSING_OR_WRONG_PACKET = -9,
+\end{minted}
+
+
+And lastly, based on the return value provided by \texttt{MQTT},
+the slave might think that the transmission was successful when in fact it was not.
+
+\subsection{Choosing MQTT parameters}
+
+For our purposes, the following parameters are important:
+\begin{enumerate}
+    \item Qos (Quality of Service): we use \texttt{Qos = 0} because as explained before the
+          handshake operation does  not seem to work reliably, given the intermittence of the radio link.
+    \item Retained messages: we use \texttt{retained = true} to garantee that the server can connect and
+          subscribe without blocking
+    \item Persistent Session/Queued Messages: we use \texttt{cleanSession = true}
+          because we do not need to store subscription information or any other information across multiple TCP connections.
+\end{enumerate}
+\ \\
+
+The most important MQTT feature for our application is Retained Messages.
+This feature guarantees that when the server connects, it will always see the last data uploaded by the slave.
+Retained Messages
+provide a start state.
+Note the \href{https://www.youtube.com/watch?v=Ct5s4gXefn4&list=PLRkdoPznE1EMXLW6XoYLGd4uUaB6wB0wd&index=9}{difference}
+between Retained Messages and Queued Messages.
+
+Retained Messages
+\begin{itemize}
+    \item work on a topic level
+    \item newly-connected subscriber to a topic receive a message immediately
+\end{itemize}
+
+Queued Messages
+\begin{itemize}
+    \item work in a client context
+    \item the broker queues undelivered messages for a specific client
+\end{itemize}
+
+We do not need to queue messages, because we know exactly how many messages the slave will send in a given timeframe.
+Therefore, the sample interval of the server can be chosen such that messages are never lost.
+
+
+To make the upload procedure reliable we chose the following approach:
+
+
+\par\noindent\rule{\textwidth}{0.4pt}
+
+\begin{figure}[h]
+    \centering
+    \begin{algorithmic}
+        \State $success = false$
+        \ForAll{$n \in \{1, \dots, 6\} \wedge success$}
+        \State open GPRS connection
+        \State open subscribe to topic \texttt{water\_meter}
+        \Comment{subscribe before publish !}
+        \State publish meter data to topic \texttt{water\_meter}
+        \State $received \gets echo$ from subscription
+        \Comment{this only happens when the upload was successful}
+        \State $success = (sent == received)$
+        \Comment{we are finished when the echo matches}
+        \EndFor
+        \If{success}
+        \State $master \gets success$
+        \Else
+        \State $master \gets failure$
+        \EndIf
+    \end{algorithmic}
+
+    \caption{Slave Broker handshake operation}
+\end{figure}
+
+Once the master receives either \texttt{success} or \texttt{failure}, the slave is powered off.
+
+A slight disadvantage of this handshake operation is that the message send from the broker to the slave
+gets lost. In this case, the slave will attempt another (paid) transmission despite the fact that the previous upload
+has been successful. Our strategy is therefore conservative which matches the requirements.
+
+
+\section{Server software}
+
+This component is available as a Linux daemon managed with the \texttt{systemctl} facility which is standard on
+current Linux desktop and server stations. The software is meant to be installed on an always-on box and should be
+configured via \texttt{systemctl} to start automatically on boot. The software is written in Java.
+
+The daemon has the following tasks:
+
+\begin{enumerate}
+    \item poll the MQTT broker for a new upload from the slave
+    \item compensate the reading for possible gaps in the upload sequence
+    \item store the data in a local database
+    \item upload the data to a cloud-based database such that data can be visualized in a static webpage
+    \item alert the supervisor in case of abnormal readings (leak)
+\end{enumerate}
+
+
+\subsection{Getting data from the broker}
+
+
+When using a publicly accessible broker, one must bear in mind that this doesn't come for free. While there
+are free solutions, we found them unsuitable for a production scenario. Since MQTT is a publish-subscribe framework,
+the obvious way to get data updates is to subscribe to the relevant topic. However, the broker has to do work
+to maintain the subscription connection and this translates in transactions that are billed.
+
+
+
+We therefore do not entertain a permanent subscription with the broker in the same way
+as we would choose if that broker were deployed locally where we would not incur communication costs.
+Rather, we connect and subscribe only at specific time points.
+Since the slave sends the message with the retained flag set, the server is guaranteed to get an update
+instantaneously (after at least one upload has been performed by the slave). In other words, the \texttt{Runnable} passed
+to the \texttt{ScheduledService} will never block. This approach resembles more to polling than to publish/subscribe.
+As long as the polling interval is shorter than the upload interval, we are guaranteed not to lose any data.
+Here, we connect every 12 hours. Recall that the slave uploads every 24 hours.
+
+Here is an extract from the server code:
+
+\begin{figure}[h]
+    \centering
+    \begin{minted}
+        [frame=lines,
+framesep=2mm,
+baselinestretch=1.2,linenos
+            ]
+        {java}
+Runnable r = () -> {
+			var cloud = io.smq().get();
+			Effect<Data_Arduino> e_inc = data -> {
+				cloud.disconnect();
+				pf.put(f_yi_sensor(io::y).apply(data));
+			};
+			cloud.sub(arduino_mqtt_topic, fd_broker, e_inc); 
+		};
+        ScheduledFuture<?> update_data = io.fses().apply(r);
+        \end{minted}
+    \caption{Polling-style publish/subscribe operation}
+\end{figure}
+
+\FloatBarrier
+\paragraph*{Comments}:
+\begin{enumerate}
+    \item [1:] create a \texttt{Runnable}. The code in curly brackets will not execute until passed to the scheduler in line 9.
+    \item [2:] open the connection with the MQTT broker. A \texttt{Supplier} is used so that we can pass in a test mock-server.
+    \item [3-6:] event handler that will run when the server receives a message on topic \texttt{arduino\_mqtt\_topic}. Note
+          that we disconnect from the broker as soon as we receive the message.
+    \item [7:] subscribe to the broker and receive a message immediately (without blocking) because of the Retained Message
+          mechanism explained earlier.
+    \item [9:] submit the \texttt{Runnable} created in 1. to the scheduler service (again obtained in a way that simplifies tests).
+          The code will run at predefined intervals.
+
+\end{enumerate}
+
+

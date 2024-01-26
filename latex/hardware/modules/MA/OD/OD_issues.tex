@@ -1,0 +1,16 @@
+\begin{table}[H]
+    \centering
+    \begin{threeparttable}[b]
+        \begin{tabularx}{\linewidth}{ >{\hsize=.15\hsize}X >{\hsize=1.35\hsize}X >{\hsize=1.5\hsize}X }
+
+            Id & Issue             & Potential solution      \\
+            \midrule
+            1  & power consumption & current source\tnote{1} \\
+        \end{tabularx}
+        \begin{tablenotes}
+            \item [1] The current implementation is not ideal. It would be better to use a (programmable) current source to avoid burning power in the current
+            limiting resistor. In addition, the optimum output current remains to be determined.
+        \end{tablenotes}
+    \end{threeparttable}
+    \caption{OD - issues}
+\end{table}

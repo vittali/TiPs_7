@@ -1,0 +1,180 @@
+\usepackage{babel}
+\usepackage{dcolumn}% Align table columns on decimal point
+\usepackage{bm}% bold math
+\usepackage{tabularx}
+\usepackage{booktabs} % for nice tables
+\usepackage{threeparttable} % to use table notes
+
+\usepackage[utf8]{inputenc}
+\usepackage{multicol}
+%\usepackage[svgnames]{xcolor}
+\usepackage{graphicx, geometry, amsmath, amsfonts, amsthm, amssymb, txfonts, mathtools, fancyvrb, fancyhdr, lastpage,
+    tikz, xcolor, siunitx,setspace, circuitikz, minted, enumitem}
+%\usepackage[cache=false,outputdir=build]{minted}
+\setlist{nolistsep} % https://tex.stackexchange.com/questions/825/remove-space-around-bullet-points-in-itemized-or-enumerated-list
+\usemintedstyle{bw}
+\usepackage{algpseudocodex}
+\usepackage[T1]{fontenc}
+\usepackage[most]{tcolorbox}
+% \usepackage[automake,nomain,acronym,postdot]{glossaries-extra}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{pgfplots}
+\usepackage[pdfencoding=auto]{hyperref}
+%\urlstyle{same}%
+\usepackage{placeins}
+\usepackage{float}  % https://tex.stackexchange.com/questions/303366/subsection-after-table-appears-before
+
+
+\usepackage{fixltx2e} % https://tex.stackexchange.com/questions/1013/how-to-typeset-subscript-in-usual-text-mode
+
+
+\usepackage{wasysym}  % smiley
+\newcommand{\netname}[1]{\fcolorbox{LightGray}{LightCyan}{\textsf{#1}}}
+
+
+\newcommand{\textoverline}[1]{$\overline{\mbox{#1}}$}
+\newcommand{\notnetname}[1]{\fcolorbox{LightGray}{LightCyan}{$\overline{\mbox{\textsf{#1}}}$}}
+
+
+\usepackage[
+    backend=biber,
+    style=authortitle,
+    sorting=ynt
+]{biblatex}
+\addbibresource{refs.bib}
+
+
+\def\Gnd{\perp}
+\def\prmaPwr{\colorbox{GhostWhite}{pwr}}
+\def\prlsPwr{\colorbox{GhostWhite}{\SI{5}{\V}}}
+
+\def\malsEn{\colorbox{GhostWhite}{\underline{en}} }
+\def\maslPwr{\colorbox{GhostWhite}{\underline{pwr}}}
+\def\mawdEn{\colorbox{GhostWhite}{\underline{en}}}
+\def\mawdKick{\colorbox{GhostWhite}{\underline{kick}}}
+\def\maodPwr{\colorbox{GhostWhite}{\underline{pwr}}}
+\def\mawdVdd{\colorbox{GhostWhite}{\SI{3.3}{\V}}}
+
+
+\def\I2C{\colorbox{GhostWhite}{$I_2C$}}
+\def\slmaAck{\colorbox{GhostWhite}{\underline{ack}}}
+\def\wdmaRes{\colorbox{GhostWhite}{\underline{reset} }}
+\def\lsslPwr{\colorbox{GhostWhite}{pwr}}
+
+
+\def\odosPwr{\colorbox{GhostWhite}{pwr}}
+\def\osodOpa{\colorbox{GhostWhite}{opa}}
+\def\odmaOpa{\colorbox{GhostWhite}{opa}}
+
+
+%Modules
+
+\def\MasterModule{\textcolor{blue}{uC Master} }
+\def\SlaveModule{\mu C Slave }
+\def\LoadSwitchModule{\textcolor{blue}{Load Switch} }
+\def\WatchdogModule{\textcolor{blue}{Watch Dog} }
+\def\OptoSwitchDriverModule{\textcolor{blue}{Opto Switch Driver} }
+\def\ICModule{\textcolor{blue}{I\textsubscript{2}C} }
+\def\MSIsoModule{\textcolor{blue}{Master Slave Iso} }
+\def\OptoSwitchModule{Opto Switch }
+\def\OLEDModule{OLED Display}
+\def\PowerModule{Power}
+
+\DeclareSIUnit{\litre}{l}
+\captionsetup[subfigure]{labelfont=rm}
+\usetikzlibrary{spy,calc}
+
+
+%\DeclareUnicodeCharacter{C6C3}{\user}
+
+\usepackage{csquotes}
+
+%\makeglossaries
+%\setabbreviationstyle[acronym]{long-short}
+
+
+\onehalfspacing
+\graphicspath{ {images/} {hardware} {hardware/modules}}
+
+\usepackage[Glenn]{fncychap}
+
+\usepackage{fontawesome}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=DarkBlue,
+    urlcolor=DarkBlue,
+    citecolor=DarkBlue,
+    pdftitle={Remote monitoring of drinking water flow in a rural environment}
+}
+
+\pagestyle{fancy}
+\fancyhead{}
+\renewcommand{\headrulewidth}{0pt}% Remove header rule
+% \lhead{left header}
+% \rhead{right header}
+\cfoot{\thepage}
+\newgeometry{
+    top=2cm,
+    bottom=2cm,
+    outer=2cm,
+    inner=2cm,
+}
+
+
+\newcommand{\eqnumtag}{%
+    % step the counter and make it lable-able
+    \refstepcounter{equation}%
+    % print the counter as tag
+    \tag{\theequation}%
+}
+
+\newcommand{\cfbox}[2]{%
+    \colorlet{currentcolor}{.}%
+    {\color{#1}%
+        \fbox{\color{currentcolor}#2}}%
+}
+
+\newcommand{\cb}[2]{{\texttt{\color{#1}\fbox{\normalcolor#2}}}}
+
+\newcommand{\net}[2]{{\textcolor{#1}{$\langle$}#2\textcolor{#1}{$\rangle$}}}
+
+\newcommand{\colview}[1]{\textcolor{#1}{\faPaintBrush}}
+
+\newcommand{\tsc}[1]{\textsubscript{#1}}
+
+\def\pub{\faEye}
+\def\pri{\faEyeSlash}
+
+
+\definecolor{p1}{RGB}{166,206,227}  % p1
+\definecolor{p2}{RGB}{31,120,180}   % p2
+\definecolor{p3}{RGB}{178,223,138}  % p3
+\definecolor{p4}{RGB}{51,160,44}    % p4
+\definecolor{p5}{RGB}{251,154,153}  % p5
+\definecolor{p6}{RGB}{227,26,28}    % p6
+\definecolor{p7}{RGB}{253,191,111}  % p7
+\definecolor{p8}{RGB}{255,127,0}    % p8
+\definecolor{p9}{RGB}{202,178,214}  % p9
+\definecolor{p10}{RGB}{106,61,154}  % p10
+\definecolor{p11}{RGB}{255,255,153} % p11
+\definecolor{p12}{RGB}{177,89,40}   % p12
+
+\definecolor{net}{RGB}{255,237,11}   % net
+
+\colorlet{n1}{p6}
+\colorlet{n2}{p10}
+\colorlet{n3}{p4}
+\colorlet{n4}{p2}
+\colorlet{n5}{p12}
+\colorlet{n6}{p5}
+\colorlet{n7}{p9}
+\colorlet{n8}{p3}
+\colorlet{n9}{p1}
+\colorlet{n10}{p8}
+\colorlet{n11}{p7}
+\colorlet{n12}{p11}
+
+
+% usage \cb{n5}{5}

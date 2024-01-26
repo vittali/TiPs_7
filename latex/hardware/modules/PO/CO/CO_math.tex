@@ -1,0 +1,125 @@
+\subsubsection {Configuring thresholds for the non-inverting comparator} \label{threshold}
+
+$U_1$ is a non-inverting comparator with hysteresis. $R_{1}$ and $R_{2}$ together with the
+bias voltage \qty{1.9}{\V}
+select the lower and upper tripping voltages.
+The computation of thresholds for the non-inverting comparator configuration with hysteresis is shown
+in several documents produced by TI:
+
+\begin{enumerate}
+    \item  equation (4) in datasheet \cite{noauthor_tlv703x_2021}: this equation   seems to be incorrect.
+    \item  TI application notes SBOA313A and TIDU020A.
+\end{enumerate}
+
+I will use the standard approach to circuit
+analysis with Kirchhoff Voltage Law (KVL):
+
+We want the hysteresis function shown in Fig \ref{fig:ch} with lower voltage threshold $V_L$ and higher voltage threshold $V_H$:
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=.4\textwidth]{hysteresis}
+    \caption{Comparator hysteresis}
+    \label{fig:ch}
+\end{figure}
+
+
+We search for $V_H$, the voltage where the comparator output will transition from low to high.
+
+$V_{TH}$ is the threshold voltage applied to the inverting input of the comparator. This is also known bias voltage.
+
+
+
+
+\begin{figure}[h]
+    \centering
+    \begin{subfigure}[b]{0.4\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{circuits/hysteresis1.pdf}
+        \subcaption{KK for low-high transition}
+        \label{fig:lh}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{circuits/hysteresis2.pdf}
+        \subcaption{KK for high-low transition}
+        \label{fig:hl}
+    \end{subfigure}
+    \caption{Equivalent circuits for hysteresis equations}
+    \label{fig:ui}
+\end{figure}
+
+
+Applying KKL for Fig \ref{fig:lh} gives us:
+
+
+
+\begin{align*} \label{lh}
+    V_{TH} - V_H + R_1 I_1 = 0                   \tag*{mesh {$M_I$}}    \\
+    V_{TH} + R_2 I_2 = 0                         \tag*{mesh {$M_{II}$}} \\
+    I_1 + I_2 = 0                                                       \\
+    \Rightarrow V_{TH} = V_H \frac{R_2}{R_1 + R_2}                      \\
+    \text{let $k$} = \frac{R_2}{R_1 + R_2}                              \\
+    \Rightarrow V_{TH} = V_H k                           \eqnumtag\label{eqn:lh}
+\end{align*}
+
+
+
+
+Applying KKL for Fig \ref{fig:hl} yields:
+
+
+\begin{align*} \label{hl}
+    V_{TH} - V_L + R_1 I_1 = 0               \tag*{mesh {$M_I$}}                       \\
+    V_{TH} - V_{cc}  + R_2 I_2 = 0                              \tag*{mesh {$M_{II}$}} \\
+    I_1 + I_2 = 0                                                                      \\
+    \Rightarrow  -V_L + R_1 I_1 + V_{cc} - R_2 I_2     = 0                             \\
+    \Rightarrow -V_L + V_{cc} -  I_2 (R_1 + R_2)       = 0                             \\
+    \Rightarrow I_2 =  \frac{V_{cc} - V_L}{R_1 + R_2}                                  \\
+    \text{let $k$} = \frac{R_2}{R_1 + R_2}                                             \\
+    \Rightarrow V_{TH} =  V_{cc}(1 - k) + V_L k              \eqnumtag\label{eqn:hl}
+\end{align*}
+
+
+With eq. \ref{eqn:lh} and \ref{eqn:hl} we must now select values for $R_1$, $R_2$ and $V_{TH}$. In practice, these values
+are not real numbers but must be chosen from a finite set of available components. In addition, at least three different
+circuit configurations for setting $V_{TH}$ are possible:
+
+\begin{itemize}
+    \item a basic voltage divider as show in (SBOA313A). The trade-off here is that larger resistors introduce more noise and
+          smaller resistors increase power consumption. Since our application is subjected to large temperature variations,
+          the resistors should not only feature tight tolerances (at least 0.1 \% ) but also a low temperature coefficient.
+          Such resistors are expensive.
+    \item a voltage divider followed by a low noise op amp in buffer configuration. This choice increases component count and
+          cost.
+    \item a voltage reference or voltage regulator with low temperature drift.  This reduces component count ( but not necessarily cost)
+          and offers the best accuracy. The trade-off here is that only a small set of reference voltages is available as
+          single component which means that eq. \ref{eqn:lh} and \ref{eqn:hl} can only be approximated.
+\end{itemize}
+
+We chose the last option since it minimizes component count. Selecting voltage regulator $U_7$ with
+$V_{TH} = \SI{1.9}{V}$, $R_1 = \SI{129}{\kilo\ohm}$ and $R_2 = \SI{569}{\kilo\ohm}$
+approximates the desired tripping voltages
+$V_l=\qty{3.7}{\V}$ and $V_h=\qty{3.9}{\V}$ with acceptable accuracy.
+
+This is verified with the help of a circuit simulator.
+
+
+
+\subsubsection{Simulation the power supervisor circuit}
+
+
+We use \href[]{https://www.analog.com/en/design-center/design-tools-and-calculators/ltspice-simulator.html}{LTSpice 17.1.10}.
+We simulate $V_L=\qty{2.89}{\V}$ and $V_H=\qty{3.84}{\V}$. Recall that the goal was $V_L=\qty{3.0}{\V}$ and $V_H=\qty{3.9}{\V}$.
+This deviation is acceptable for our application.
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{supervisor-sim}
+    \caption{Power supervisor Spice simulation}
+    \label{fig:sss}
+\end{figure}
+

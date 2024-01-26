@@ -1,0 +1,28 @@
+\subsection{Comp Ref Voltage Module (CR) }
+\label{sec:CR}
+
+The Comp Ref Voltage Module (CR) provides a regulated \SI{1.9}{\volt} supply rail for CO.
+As we shall see later, this voltage sets the amount of hysteresis applied to the switching
+threshold of the comparator.
+
+
+\subsubsection{Requirements}
+
+The reference voltage is determined by the computation shown in \ref{threshold}.
+
+
+\subsubsection{Implementation}
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{PO/CR/CR}
+    \caption{CR - schematic, from datasheet \cite{noauthor_tps783xx_2014}}
+\end{figure}
+\input{hardware/modules/PO/CR/CR_pm}
+
+\input{hardware/modules/PO/CR/CR_BOM}
+\input{hardware/modules/PO/CR/CR_issues}
+
+
+

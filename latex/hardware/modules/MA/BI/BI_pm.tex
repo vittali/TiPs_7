@@ -1,0 +1,36 @@
+\begin{table}[H]
+    \centering
+    \begin{threeparttable}[b]
+        \begin{tabularx}{\linewidth}{ >
+                    {\hsize=.25\hsize}X >
+                    {\hsize=0.5\hsize}X >
+                    {\hsize=.25\hsize}X  >
+                    {\hsize=.5\hsize}X >
+                    {\hsize=.25\hsize}X  >
+                    {\hsize=3\hsize}X
+            }
+                  & \multicolumn{4}{c}{Pin mapping} &                                                                            \\
+            \cmidrule(lr){3-6}
+            Id    & Net                             & Nb. & Name          & Type            & Function                           \\
+            \midrule
+            $U_1$ & .COM                            & 1   & \texttt{IN1}  & \leftharpoonup  & switch 1 enable, driven by \mu S   \\
+            $U_1$ & .ACK'                           & 2   & \texttt{NO1}  & \rightharpoonup & normally open, switch 1 output     \\
+            $U_1$ & \Gnd                            & 3   & \texttt{GND}  & \Gnd            & \Gnd                               \\
+            $U_1$ & .COM                            & 5   & \texttt{IN2}  & \leftharpoonup  & switch 2 enable, switch 2 not used \\
+            $U_1$ & .3V3                            & 8   & \texttt{V+}   & \leftarrow      & power supply                       \\
+            $U_1$ & .ACK                            & 10  & \texttt{COM1} & \leftharpoonup  & switch 1 input                     \\
+            $U_2$ & .COM                            & 1   & \texttt{IN1}  & \leftharpoonup  & switch 1 enable, driven by \mu S   \\
+            $U_2$ & .SCL'                           & 2   & \texttt{NO1}  & \rightharpoonup & normally open, switch 1 output     \\
+            $U_2$ & \Gnd                            & 3   & \texttt{GND}  & \Gnd            & \Gnd                               \\
+            $U_2$ & .SDA'                           & 4   & \texttt{NO2}  & \rightharpoonup & \Gnd                               \\
+            $U_2$ & .COM                            & 5   & \texttt{IN2}  & \leftharpoonup  & switch 2 enable, switch 2 not used \\
+            $U_2$ & .SDA                            & 6   & \texttt{COM2} & \leftharpoonup  & switch 2 enable, switch 2 not used \\
+            $U_2$ & .3V3                            & 8   & \texttt{V+}   & \leftarrow      & power supply                       \\
+            $U_2$ & .SCL                            & 10  & \texttt{COM1} & \leftharpoonup  & switch 1 input                     \\
+        \end{tabularx}
+        \begin{tablenotes}
+            \item []
+        \end{tablenotes}
+    \end{threeparttable}
+
+\end{table}

@@ -1,0 +1,34 @@
+\subsection{Bus Isolation Module (BI)}
+
+The Bus Isolation Module (BI) allows the slave to interconnect its GPIO pins with equivalent pins of the \mu M module.
+These pins are not designed to support voltages > 0 when the microcontroller is powered off.
+Since the slave microcontroller
+is powered on only during the transmission phase, the pins configured for I2C would effectively be back-powered via
+the internal ESD protection diodes.
+
+\subsubsection*{Specification}
+
+The switch must have the following characteristics:
+\begin{itemize}
+    \item low power: this excludes mechanical switches like reed relays
+    \item bidirectional
+    \item 3.3V logic compatible
+\end{itemize}
+
+\subsubsection*{Implementation}
+
+\input{hardware/modules/MA/BI/BI_BOM}
+\input{hardware/modules/MA/BI/BI_issues}
+\clearpage
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.0\textwidth]{MA/BI/BI}
+    \caption{BI - schematic, based on datasheet \cite{noauthor_ts5a23157_2004}}
+\end{figure}
+
+\input{hardware/modules/MA/BI/BI_pm}
+\clearpage
+
+

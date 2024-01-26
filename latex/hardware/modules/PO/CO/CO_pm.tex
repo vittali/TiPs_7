@@ -1,0 +1,25 @@
+
+\begin{table}[H]
+    \centering
+    \begin{threeparttable}[b]
+        \begin{tabularx}{\linewidth}{ >
+                    {\hsize=.25\hsize}X >
+                    {\hsize=0.5\hsize}X >
+                    {\hsize=.25\hsize}X  >
+                    {\hsize=.5\hsize}X >
+                    {\hsize=.25\hsize}X  >
+                    {\hsize=3\hsize}X
+            }
+                  & \multicolumn{4}{c}{pin} &                                                     \\
+            \cmidrule(lr){3-6}
+            Id    & Net                     & Nb. & Name         & Type           & Function      \\
+            \midrule
+            $U_1$ & .B                      & 1   & \texttt{IN}  & \leftarrow     & input         \\
+            $U_1$ & \Gnd                    & 2   & \texttt{GND} & \Gnd           &               \\
+            $U_1$ & EN                      & 3   & \texttt{EN}  & \leftharpoonup & enable output \\
+            $U_1$ & \Gnd                    & 4   & \texttt{GND} & \Gnd           &               \\
+            $U_1$ & .1V9                    & 5   & \texttt{OUT} & \rightarrow    & output        \\
+        \end{tabularx}
+    \end{threeparttable}
+    \caption{WD - Pin mapping}
+\end{table}

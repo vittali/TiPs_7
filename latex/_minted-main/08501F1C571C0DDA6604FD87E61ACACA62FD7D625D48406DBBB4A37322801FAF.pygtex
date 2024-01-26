@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{LWMQTT\PYGZus{}NETWORK\PYGZus{}FAILED\PYGZus{}CONNECT}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{\PYGZhy{}3}\PYG{p}{,}
+\PYG{n}{LWMQTT\PYGZus{}NETWORK\PYGZus{}TIMEOUT}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{\PYGZhy{}4}\PYG{p}{,}
+\PYG{n}{LWMQTT\PYGZus{}NETWORK\PYGZus{}FAILED\PYGZus{}READ}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{\PYGZhy{}5}\PYG{p}{,}
+\PYG{n}{LWMQTT\PYGZus{}MISSING\PYGZus{}OR\PYGZus{}WRONG\PYGZus{}PACKET}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{\PYGZhy{}9}\PYG{p}{,}
+\end{Verbatim}

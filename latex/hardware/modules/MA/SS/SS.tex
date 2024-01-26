@@ -1,0 +1,32 @@
+\subsection{Slave Switch Module (SS)}
+\label{sec:SS}
+
+
+The Slave Switch Module (SS) controls the power supply to the Slave Module (SL).
+As explained previously in section \ref{sec:Too}, the slave is powered only during transmission in order
+to reduce energy consumption mainly due to the relatively high standby current of the radio module.
+
+\subsubsection*{Requirements}
+
+
+The load switch must be able to switch the maximum current for both master and slave.
+The maximum current is determined by the GMS module on the slave.
+We expect the maximum to not exceed \SI{1}{\A}.
+
+\subsubsection*{Implementation}
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.3\textwidth]{MA/SS/SS}
+    \caption{SS - schematic, based on datasheet \cite{noauthor_tps22810_2016}}
+\end{figure}
+
+\input{hardware/modules/MA/SS/SS_pm}
+\input{hardware/modules/MA/SS/SS_issues}
+\input{hardware/modules/MA/SS/SS_BOM}
+
+
+
+
+

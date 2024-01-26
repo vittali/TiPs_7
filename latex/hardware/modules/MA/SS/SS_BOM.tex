@@ -1,0 +1,29 @@
+\begin{table}[H]
+    \centering
+    \begin{threeparttable}[b]
+        \begin{tabularx}{\linewidth}{ >
+                    {\hsize=0.25\hsize}X >
+                    {\hsize=0.75\hsize}X >
+                    {\hsize=1.25\hsize}X >
+                    {\hsize=0.5\hsize}X >
+                    {\hsize=2.25\hsize}X
+            }
+            Id    & BOM Item                      & Order Code       & FF       & Rationale                                                                               \\
+            \midrule
+            $U_1$ & \cite{noauthor_tps22810_2016} & TPS22810DBVR/710 & SOT-23/6 & low $R_{ON}$\tnote{1}, input voltage range down to \SI{2.7}{\V}, low quiescent current. \\
+        \end{tabularx}
+        \begin{tablenotes}
+            \item [1] The \cite{noauthor_arduino_2016-1} requires a \SI{5}{\V} power supply which is
+            regulated to \SI{3.3}{\V} on the board.
+
+            The Arduino board uses the \cite{noauthor_ap7115_2017} voltage regulator.
+            According to the datasheet, the dropout voltage is
+            \SI{200}{\mV}. Therefore, the voltage supplied to the Arduino $V_{\mu M}$ must be greater than \SI{3.5}{\V}.
+        \end{tablenotes}
+    \end{threeparttable}
+    \caption{SS - BOM}
+\end{table}
+
+
+
+

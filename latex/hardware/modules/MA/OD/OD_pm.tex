@@ -1,0 +1,32 @@
+\begin{table}[H]
+    \centering
+    \begin{threeparttable}[b]
+        \begin{tabularx}{\linewidth}{ >
+                    {\hsize=.25\hsize}X >
+                    {\hsize=0.5\hsize}X >
+                    {\hsize=.25\hsize}X  >
+                    {\hsize=.5\hsize}X >
+                    {\hsize=.25\hsize}X  >
+                    {\hsize=3\hsize}X
+            }
+                  & \multicolumn{4}{c}{Pin mapping} &                                                                             \\
+            \cmidrule(lr){3-6}
+            Id    & Net                             & Nb. & Name         & Type            & Function                             \\
+            \midrule
+            $U_1$ & .EOD                            & 1   & \texttt{1A}  & \leftharpoonup  & buffer input controlled by \mu C     \\
+            $U_1$ & .EOD                            & 3   & \texttt{2A}  & \leftharpoonup  & buffer input controlled by \mu C     \\
+            $U_1$ & \Gnd                            & 2   & \texttt{GND} & \Gnd            &                                      \\
+            $U_1$ & Y                               & 4   & \texttt{1Y}  & \rightharpoonup & buffer output                        \\
+            $U_1$ & .3V3                            & 5   & \texttt{VCC} & \leftarrow      & power supply                         \\
+            $U_1$ & Y                               & 6   & \texttt{2Y}  & \rightharpoonup & buffer output                        \\
+            $R_c$ & Y                               & 1   & \texttt{1}   &                 &                                      \\
+            $R_c$ & .V\textsubscript{OS}            & 2   & \texttt{2}   &                 & anode voltage of photodiode          \\
+            $R_p$ & .3V3                            & 1   & \texttt{1}   &                 & upper rail for pullup resistor       \\
+            $R_p$ & .Prx                            & 2   & \texttt{2}   &                 & collector voltage of phototransistor \\
+        \end{tabularx}
+        \begin{tablenotes}
+            \item []
+        \end{tablenotes}
+    \end{threeparttable}
+
+\end{table}

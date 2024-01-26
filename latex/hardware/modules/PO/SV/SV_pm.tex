@@ -1,0 +1,28 @@
+\begin{table}[H]
+    \centering
+    \begin{threeparttable}[b]
+        \begin{tabularx}{\linewidth}{ >
+                    {\hsize=.25\hsize}X >
+                    {\hsize=0.5\hsize}X >
+                    {\hsize=.25\hsize}X  >
+                    {\hsize=.5\hsize}X >
+                    {\hsize=.25\hsize}X  >
+                    {\hsize=3\hsize}X
+            }
+                  & \multicolumn{4}{c}{pin} &                                                         \\
+            \cmidrule(lr){3-6}
+            Id    & Net                     & Nb. & Name         & Type             & Function        \\
+            \midrule
+            $U_1$ & Inv                     & 1   & \texttt{+IN} & \leftsquigarrow  & input           \\
+            $U_1$ & \Gnd                    & 2   & \texttt{V-}  & \Gnd             &                 \\
+            $U_1$ & .B'                     & 3   & \texttt{-IN} & \leftsquigarrow  & inverting input \\
+            $U_1$ & .B'                     & 4   & \texttt{OUT} & \rightsquigarrow & output          \\
+            $U_1$ & .2V5                    & 5   & \texttt{V+}  & \leftarrow       & power supply    \\
+            $R_1$ & .B                      & 1   & \texttt{OUT} &                  &                 \\
+            $R_1$ & Inv                     & 2   & \texttt{OUT} &                  &                 \\
+            $R_2$ & Inv                     & 1   & \texttt{OUT} &                  &                 \\
+            $R_2$ & \Gnd                    & 2   & \texttt{OUT} &                  &                 \\
+        \end{tabularx}
+    \end{threeparttable}
+    %  \caption{WD - Pin mapping}
+\end{table}

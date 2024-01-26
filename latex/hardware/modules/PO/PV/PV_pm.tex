@@ -1,0 +1,36 @@
+
+\begin{table}[H]
+    \centering
+    \begin{threeparttable}[b]
+        \begin{tabularx}{\linewidth}{ >
+                    {\hsize=.25\hsize}X >
+                    {\hsize=0.5\hsize}X >
+                    {\hsize=.25\hsize}X  >
+                    {\hsize=.5\hsize}X >
+                    {\hsize=.25\hsize}X  >
+                    {\hsize=3\hsize}X
+            }
+                  & \multicolumn{4}{c}{pin} &                                                              \\
+            \cmidrule(lr){3-6}
+            Id    & Net                     & Nb. & Name          & Type                 & Function        \\
+            \midrule
+            $U_1$ & \Gnd                    & 1   & \texttt{GND}  & \Gnd                 &                 \\
+            $U_1$ & \Gnd                    & 2   & \texttt{GND}  & \Gnd                 &                 \\
+            $U_1$ & EN                      & 3   & \texttt{EN}   & \leftharpoonup       & enable output   \\
+            $U_1$ & .B                      & 4   & \texttt{VIN}  & \leftarrow           & input           \\
+            $U_1$ & NR                      & 5   & \texttt{NR}   & \leftrightsquigarrow & noise reduction \\
+            $U_1$ & .2V5                    & 6   & \texttt{VREF} & \rightarrow          & output          \\
+            $C_1$ & .B                      & 1   & \texttt{1}    &                      &                 \\
+            $C_1$ & \Gnd                    & 2   & \texttt{2}    & \Gnd                 &                 \\
+            $C_2$ & .B                      & 1   & \texttt{1}    &                      &                 \\
+            $C_2$ & \Gnd                    & 2   & \texttt{2}    & \Gnd                 &                 \\
+            $C_3$ & NR                      & 1   & \texttt{1}    &                      &                 \\
+            $C_3$ & \Gnd                    & 2   & \texttt{2}    & \Gnd                 &                 \\
+            $C_4$ & .2V5                    & 1   & \texttt{1}    &                      &                 \\
+            $C_4$ & \Gnd                    & 2   & \texttt{2}    & \Gnd                 &                 \\
+            $C_5$ & .2V5                    & 1   & \texttt{1}    &                      &                 \\
+            $C_5$ & \Gnd                    & 2   & \texttt{2}    & \Gnd                 &                 \\
+        \end{tabularx}
+    \end{threeparttable}
+    %\caption{WD - Pin mapping}
+\end{table}

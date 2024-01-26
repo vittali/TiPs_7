@@ -1,0 +1,30 @@
+
+\begin{table}[H]
+    \centering
+    \begin{threeparttable}[b]
+        \begin{tabularx}{\linewidth}{ >
+                    {\hsize=.25\hsize}X >
+                    {\hsize=0.5\hsize}X >
+                    {\hsize=.25\hsize}X  >
+                    {\hsize=.5\hsize}X >
+                    {\hsize=.25\hsize}X  >
+                    {\hsize=3\hsize}X
+            }
+                  & \multicolumn{4}{c}{pin} &                                                    \\
+            \cmidrule(lr){3-6}
+            Id    & Net                     & Nb. & Name       & Type                 & Function \\
+            \midrule
+            $D_1$ & .S\textsubscript{n'c}   & 1   & \texttt{1} & \Gnd                 &          \\
+            $D_1$ & \Gnd                    & 2   & \texttt{2} & \Gnd                 &          \\
+            $D_2$ & .S\textsubscript{n}     & 1   & \texttt{1} & \Gnd                 &          \\
+            $D_2$ & \Gnd                    & 2   & \texttt{2} & \Gnd                 &          \\
+            $D_3$ & .S\textsubscript{n}     & 1   & \texttt{A} &                      &          \\
+            $D_3$ & .S\textsubscript{n'}    & 2   & \texttt{C} &                      &          \\
+            $R_1$ & .S\textsubscript{n}     & 1   & \texttt{1} & \leftarrow           &          \\
+            $R_1$ & .S\textsubscript{n'c}   & 2   & \texttt{2} & \leftrightsquigarrow &          \\
+            $R_2$ & .S\textsubscript{n'c}   & 1   & \texttt{1} & \rightarrow          &          \\
+            $R_2$ & \Gnd                    & 2   & \texttt{2} &                      &          \\
+        \end{tabularx}
+    \end{threeparttable}
+    %\caption{WD - Pin mapping}
+\end{table}

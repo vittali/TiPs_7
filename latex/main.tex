@@ -1,0 +1,38 @@
+%default without biber, full with biber
+
+%!LW recipe=full
+\PassOptionsToPackage{svgnames}{xcolor}
+%\documentclass[english]{article}
+\documentclass[english, twoside]{report}
+\input{preamble}
+\title{Smart Village\\
+{\Large Remote monitoring of drinking water consumption in a rural environment}
+}
+\author{Peter Vittali}
+\date{\today\\v1.0}
+\begin{document}
+
+\maketitle
+
+\include {abstract}
+\include {credit}
+
+\tableofcontents
+\listoffigures
+
+\include {intro}
+\include {existent}
+\include {archi}
+\include {hardware/hardware}
+\include {software}
+\include {conclusion}
+%\appendix
+%\include {appendix}
+
+
+\printbibliography
+
+
+
+
+\end{document}

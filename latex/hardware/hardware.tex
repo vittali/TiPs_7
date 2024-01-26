@@ -1,0 +1,35 @@
+\chapter{Hardware}
+
+The hardware comprising the embedded system in \ref{fig:rwm} is based on a master-slave configuration.
+\input{hardware/theory}
+
+\clearpage
+\section{Remote Water Meter (RWM) system}
+
+The RWM system is composed of four top-level modules:
+
+\begin{enumerate}
+    \item Master Module (MA): water flow measurement and SL power management.
+    \item Slave Module (SL): data transmission via GSM.
+    \item Power Module (PO): power source aggregation, signal conditioning and MA power management.
+    \item Optical Sensor (OS): signal conditioning of water flow indicator (tally).
+\end{enumerate}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.0\textwidth]{EP}
+\end{figure}
+
+\input{hardware/EP_net}
+\clearpage
+
+
+
+\clearpage
+\input{hardware/modules/MA/MA}
+\clearpage
+\input{hardware/modules/SL/SL}
+\clearpage
+\input{hardware/modules/PO/PO}
+\clearpage
+\input{hardware/modules/OS/OS}

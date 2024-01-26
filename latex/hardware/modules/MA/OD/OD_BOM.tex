@@ -1,0 +1,23 @@
+\begin{table}[H]
+    \centering
+    \begin{threeparttable}[b]
+        \begin{tabularx}{\linewidth}{ >{\hsize=0.25\hsize}X >{\hsize=0.75\hsize}X >{\hsize=1.25\hsize}X >{\hsize=0.5\hsize}X >{\hsize=2.25\hsize}X}
+
+            Id    & Desc                             & Order Code          & FF     & Rationale                                   \\
+            \midrule
+            $U_1$ & \cite{noauthor_sn74lvc2g17_2002} & SN74LVC2G17DCKR/473 & SC70/6 & high output power, parallel output\tnote{1} \\
+            $R_p$ & \SI{1}{\kilo\ohm}                & generic             & 0603   & pull-up resistor\tnote{2}                   \\
+            $R_c$ & \SI{20}{\ohm}                    & generic             & 0603   & current limit resistor \tnote{3}            \\
+            $C_b$ & \SI{100}{\nF}, \SI{16}{\V}       & generic             & 0402   & bypass cap                                  \\
+        \end{tabularx}
+        \begin{tablenotes}
+            \item [1] for a total rated maximum of \SI{48}{\milli\ampere}, low power consumption,
+            the Smitt-Trigger inputs are not really necessary for this application.
+            \item [2] We should explain why we choose this value. But as mentioned in Issue 1, we are likely
+            to replace the current limit resistor with a current source in the near future.
+            \item [3] idem
+        \end{tablenotes}
+    \end{threeparttable}
+    \caption{OD - BOM}
+    \label{table:wd1}
+\end{table}

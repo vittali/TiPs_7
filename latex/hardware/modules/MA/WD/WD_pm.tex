@@ -1,0 +1,36 @@
+
+\begin{table}[H]
+    \centering
+    \begin{threeparttable}[b]
+        \begin{tabularx}{\linewidth}{ >
+                    {\hsize=.25\hsize}X >
+                    {\hsize=0.5\hsize}X >
+                    {\hsize=.25\hsize}X  >
+                    {\hsize=.5\hsize}X >
+                    {\hsize=.25\hsize}X  >
+                    {\hsize=3\hsize}X
+            }
+                  & \multicolumn{4}{c}{pin} &                                                                                                   \\
+            \cmidrule(lr){3-6}
+            Id    & Net                     & Nb. & Name                        & Type            & Function                                    \\
+            \midrule
+            $U_1$ & .3V3                    & 1   & \texttt{VDD}                & $\leftarrow$    & power supply                                \\
+            $U_1$ & CWD                     & 2   & \texttt{CWD}                & \leftsquigarrow & The timeout period is configured with $C_c$ \\
+            $U_1$ & \Gnd                    & 4   & \texttt{GND}                & \Gnd            &                                             \\
+            $U_1$ & .EWD                    & 5   & \texttt{SET1}               & \leftharpoonup  & enable timer                                \\
+            $U_1$ & .RWD                    & 6   & \texttt{WDI}                & \leftharpoonup  & reset timer\tnote{1}                        \\
+            $U_1$ & .\neg RS                & 7   & \texttt{\textoverline{WDO}} & \rightharpoonup & pin pulled down if timer expired            \\
+            $U_1$ &                         & 3,8 & \texttt{EN}, \texttt{ENOUT} &                 & can be left floating for this application   \\
+            $C_c$ & CWD                     & 1   & \texttt{1}                  &                 &                                             \\
+            $C_c$ & \Gnd                    & 2   & \texttt{2}                  & \Gnd            &                                             \\
+            $R_p$ & .\neg RS                & 1   & \texttt{1}                  &                 & open drain pullup                           \\
+            $R_p$ & \Gnd                    & 2   & \texttt{2}                  & \Gnd            &                                             \\
+            \bottomrule
+        \end{tabularx}
+        \begin{tablenotes}
+            \item [1] pulled down by \mu M in regular intervals < 8 s during normal operation.
+        \end{tablenotes}
+    \end{threeparttable}
+    \caption{WD - Pin mapping}
+\end{table}
+

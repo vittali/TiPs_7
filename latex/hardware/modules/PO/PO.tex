@@ -1,0 +1,45 @@
+\section{Power distribution and monitoring Module (PO)}
+
+The PO module is composed of eight modules:
+
+\begin{enumerate}
+    \item Comp Ref Voltage (CR): provide regulated \SI{1.9}{\volt} supply rail.
+    \item Precision Voltage (PV): provide regulated \SI{2.5}{\volt} supply rail.
+    \item Solar Input (SI\textsubscript{1}): filter and scale solar panel output.
+    \item Solar Input (SI\textsubscript{2}): filter and scale solar panel output.
+    \item OR-ing (OR): combine outputs from (SI\textsubscript{1,2}).
+    \item Scale V\textsubscript{batt} (SV): scale down battery voltage suitable for a \SI{2.5}{\volt} supply rail.
+    \item Comparator (CO): Schmitt-Trigger with hysteresis.
+    \item Master Switch (MS): control power supply of \mu M.
+\end{enumerate}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.0\textwidth]{PO/PO}
+\end{figure}
+
+\input{hardware/modules/PO/PO_net}
+\clearpage
+
+\input{hardware/modules/PO/CR/CR}
+\input{hardware/modules/PO/PV/PV}
+\input{hardware/modules/PO/SI/SI}
+\clearpage
+\input{hardware/modules/PO/OR/OR}
+\clearpage
+\input{hardware/modules/PO/SV/SV}
+\clearpage
+\input{hardware/modules/PO/CO/CO}
+\input{hardware/modules/PO/MS/MS}
+\clearpage
+
+
+
+
+
+
+
+
+
+
+

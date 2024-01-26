@@ -1,0 +1,17 @@
+
+\begin{table}[H]
+    \centering
+    \begin{threeparttable}[b]
+        \begin{tabularx}{\linewidth}{ >{\hsize=.15\hsize}X >{\hsize=1.35\hsize}X >{\hsize=1.5\hsize}X }
+            \toprule
+            Id & Issue                           & Potential solutions      \\
+            \midrule
+            1  & Make watchdog reset  persistent & add a flip-flop\tnote{1} \\
+            \bottomrule
+        \end{tabularx}
+        \begin{tablenotes}
+            \item [1] the state of the flip-flop could then be transmitted to alert a human supervisor that the circuit has malfunctioned.
+        \end{tablenotes}
+    \end{threeparttable}
+    \caption{WD - issues}
+\end{table}

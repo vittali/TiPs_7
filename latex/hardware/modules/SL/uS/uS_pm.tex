@@ -1,0 +1,32 @@
+\begin{table}[H]
+    \centering
+    \begin{threeparttable}[b]
+        \begin{tabularx}{\linewidth}{ >
+                    {\hsize=.25\hsize}X >
+                    {\hsize=0.5\hsize}X >
+                    {\hsize=.25\hsize}X  >
+                    {\hsize=.5\hsize}X >
+                    {\hsize=.25\hsize}X  >
+                    {\hsize=3\hsize}X
+            }
+                  & \multicolumn{4}{c}{Pin mapping} &                                                                                                            \\
+            \cmidrule(lr){3-6}
+            Id    & Net                             & Nb. & Name           & Type               & Function                                                       \\
+            \midrule
+            $U_1$ & .CON                            & 9   & \texttt{A0}    & \rightharpoonup    & high: connect I2C bus to master (bypass the isolation barrier) \\
+            $U_1$ & .ACK                            & 10  & \texttt{D0}    & \rightharpoonup    & high: signal to master that I am ready to receive data         \\
+            $U_1$ & .CS                             & 11  & \texttt{D1}    & \rightharpoonup    &                                                                \\
+            $U_1$ & EWD                             & 12  & \texttt{D5}    & \rightharpoonup    & enable WD                                                      \\
+            $U_1$ & RWD                             & 13  & \texttt{D5}    & \rightharpoonup    & reset WD                                                       \\
+            $U_1$ & .MISO                           & 17  & \texttt{D2}    & \leftharpoonup     &                                                                \\
+            $U_1$ & .SCK                            & 18  & \texttt{D3}    & \rightharpoonup    &                                                                \\
+            $U_1$ & .MOSI                           & 19  & \texttt{D4}    & \rightharpoonup    &                                                                \\
+            $U_1$ & .SDA                            & 20  & \texttt{SDA}   & \leftrightharpoons &                                                                \\
+            $U_1$ & .SCL                            & 21  & \texttt{SCL}   & \rightharpoonup    &                                                                \\
+            $U_1$ & \neg RS                         & 24  & \texttt{RESET} & \leftharpoonup     & pulled down by WD timer or user button in case of timeout      \\
+            $U_1$ & \Gnd                            & 25  & \texttt{GND}   & \Gnd               &                                                                \\
+            $U_1$ & .3V3                            & 26  & \texttt{VCC}   & $\rightarrow$      & regulated output voltage\tnote{1}                              \\
+            $U_1$ & .V\textsubscript{\mu S}         & 27  & \texttt{VIN}   & $\leftarrow$       & input voltage controlled by \mu M                              \\
+        \end{tabularx}
+    \end{threeparttable}
+\end{table}

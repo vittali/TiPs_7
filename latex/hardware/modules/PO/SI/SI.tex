@@ -1,0 +1,25 @@
+\subsection{Solar Input Module (SI) }
+\label{sec:SI}
+
+The Solar Input Module (SI) filters and scales the output voltage of the solar panels.
+Given the physical distance between panel and SI of approx. \SI{20}{\meter}, the inputs are susceptible
+to overvoltage due to atmospheric disturbances. The solar panel output voltage should also be
+digitized by \mu M.
+
+
+\subsubsection{Requirements}
+
+The voltage applied to the analog input of \mu M must not exceed \SI{3.3}{\volt}.
+
+
+\subsubsection{Implementation}
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{PO/SI/SI}
+    \caption{SI - schematic, n = 1,2}
+\end{figure}
+\input{hardware/modules/PO/SI/SI_pm}
+\input{hardware/modules/PO/SI/SI_BOM}
+\input{hardware/modules/PO/SI/SI_issues}

@@ -1,0 +1,35 @@
+\subsection{Comparator Module (CO) }
+\label{sec:CO}
+
+The Comparator Module (CO) maps the scaled battery voltage to a digital signal.
+A logical H applies power to \mu M.
+
+
+\subsubsection{Requirements}
+
+We choose the lower threshold of the comparator to be equivalent to a battery voltage of
+\SI{3}{\V}. Since we scaled this voltage by a factor of 0.645 (see \ref{sss:svi}), the lower threshold
+for the comparator is then set
+to $V_L=   0.645 \cdot\qty{ 3.0}{\V} = \qty{ 1.94}{\V}$.
+\par
+We choose the upper threshold of the comparator to be equivalent to a battery voltage of
+\SI{3.9}{\V}. The upper threshold
+for the comparator is then set
+to $V_H= 0.645 \cdot \qty{3.9}{\V} = \qty{2.52}{\V}$.
+
+
+
+\subsubsection{Implementation}
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{PO/CO/CO}
+    % \caption{CO - schematic}
+\end{figure}
+\input{hardware/modules/PO/CO/CO_pm}
+\input{hardware/modules/PO/CO/CO_BOM}
+\input{hardware/modules/PO/CO/CO_issues}
+\clearpage
+\input{hardware/modules/PO/CO/CO_math}
+\clearpage

@@ -1,0 +1,18 @@
+\begin{table}[H]
+    \centering
+    \begin{threeparttable}[b]
+        \begin{tabularx}{\linewidth}{ >{\hsize=.15\hsize}X >{\hsize=1.35\hsize}X >{\hsize=1.5\hsize}X }
+            Id & Issue                                       & Potential solutions \\
+            \midrule
+            1  & $U_{1,2}$ can not be back-powered.\tnote{1} & TMUX1574RSVR (TI)   \\
+        \end{tabularx}
+        \begin{tablenotes}
+            \item [1]   Usually, the slave is not powered on when the master is powered off because
+            the load switch for the slave power supply requires a logic H from the master to be on.
+            However, when flashing (programming) the slave, the master could be switched off and in this
+            case the supply voltage of $U_{1,2}$ if \SI{0}{\volt}.
+        \end{tablenotes}
+    \end{threeparttable}
+    \caption{\mu M - Issues}
+
+\end{table}

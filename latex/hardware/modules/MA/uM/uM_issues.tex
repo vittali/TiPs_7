@@ -1,0 +1,17 @@
+\begin{table}[H]
+    \centering
+    \begin{threeparttable}[b]
+        \begin{tabularx}{\linewidth}{ >{\hsize=.15\hsize}X >{\hsize=1.35\hsize}X >{\hsize=1.5\hsize}X }
+            Id & Issue                                                 & Potential solutions                                             \\
+            \midrule
+            1  & $U_1$ has relatively high power consumption.\tnote{1} & low power \mu C (MSP430FR2311IPW16) and custom charger circuit. \\
+            2  & $U_1$ requires a stable 5 V power supply.\tnote{2}    & see issue 1                                                     \\
+        \end{tabularx}
+        \begin{tablenotes}
+            \item [1]   This is due to the microcontroller itself (SAM D21) and to the peripheral components (battery charger).
+            \item [2]   Given that a \SI{3.7}{\V} LiPo battery is used, this requires a boost conversion which in turn implies losses.
+        \end{tablenotes}
+    \end{threeparttable}
+    \caption{\mu M - Issues}
+
+\end{table}

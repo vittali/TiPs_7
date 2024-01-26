@@ -1,0 +1,43 @@
+\subsection{Scale V\textsubscript{batt}  Module (SV) }
+\label{sec:SV}
+
+The Scale V\textsubscript{batt} Module (SV) scales the battery voltage to make it compatible with
+the operation voltage of  \mu M (\SI{3.3}{\volt}).
+
+
+\subsubsection{Requirements}
+
+The battery voltage  \cb{net}{.B} must be scaled such that the maximum value is close to
+the upper input voltage limit of SV.
+We suppose that the maximum voltage of a one-cell LiPo battery does not exceed  \SI{4.1}{\V}.
+Let us recall that SV must operate from \SI{2.5}{\volt} which is lower than the minimum battery voltage.
+There is some debate on how low LiPo batteries can be discharged. Some argue that \SI{2.5}{\V}
+can be set a lower threshold. We have decided to not got beyond \SI{3}{\V}
+until we have carried out our own measurements with our
+batteries.
+
+
+
+\subsubsection{Implementation}
+\label{sss:svi}
+
+We choose $U_1$ with an input common mode range of \SI{\pm100}{\milli\volt} beyond rail.
+That means we can map the maximum battery voltage
+to the supply rail of the op amp (\SI{2.5}{\volt}) while still keeping some margin. \par
+
+
+The scale coefficient is thus $k = \frac{\si{2.5}{V}}{\si{4.1}{V}} = 0.61$.
+I choose $R_1 = \SI{129}{\kilo\ohm}, R_1 = \SI{200}{\kilo\ohm}, k = 0.645$.
+The maximum voltage at the non-inverting input of the buffer is therefore
+$V_{max} = 0.645 \cdot\SI{4.1}{\V}  = \SI{2.64}{\V}$.
+
+\par
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.0\textwidth]{PO/SV/SV}
+    % \caption{SI - schematic, n = 1,2}
+\end{figure}
+\input{hardware/modules/PO/SV/SV_pm}
+\input{hardware/modules/PO/SV/SV_BOM}
+\input{hardware/modules/PO/SV/SV_issues}

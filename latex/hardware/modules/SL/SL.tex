@@ -1,0 +1,29 @@
+
+\section{Slave Module (SL)}
+\label{sec:SL}
+
+The SL module is composed of five modules:
+
+\begin{enumerate}
+    \item \mu C Slave (\mu S): transmit measurement data via GSM.
+    \item Watchdog Timer (WD): supervise program flow of \mu S.
+    \item Voltage Supervisor (SS) : supervise supply voltage of \mu S.
+    \item I2C Bus (I2C): implement I2C bus requirements (pullup resistors).
+    \item SD-Card Reader (SD): log process data to SD-card.
+\end{enumerate}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.9\textwidth]{SL/SL}
+\end{figure}
+
+
+\input{hardware/modules/SL/SL_net}
+\clearpage
+\input{hardware/modules/SL/uS/uS}
+\input{hardware/modules/SL/WD/WD}
+\input{hardware/modules/SL/I2C/I2C}
+\input{hardware/modules/SL/SD/SD}
+\clearpage
+\input{hardware/modules/SL/VS/VS}
+\clearpage

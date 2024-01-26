@@ -1,0 +1,24 @@
+
+\begin{table}[H]
+    \centering
+    \begin{threeparttable}[b]
+        \begin{tabularx}{\linewidth}{ >
+                    {\hsize=.25\hsize}X >
+                    {\hsize=0.5\hsize}X >
+                    {\hsize=.25\hsize}X  >
+                    {\hsize=.5\hsize}X >
+                    {\hsize=.25\hsize}X  >
+                    {\hsize=3\hsize}X
+            }
+                  & \multicolumn{4}{c}{pin} &                                                      \\
+            \cmidrule(lr){3-6}
+            Id    & Net                     & Nb. & Name       & Type           & Function         \\
+            \midrule
+            $U_1$ & V\textsubscript{OS}     & 1   & \texttt{1} & \leftarrow     & IR diode anode   \\
+            $U_1$ & \Gnd                    & 2   & \texttt{2} & \Gnd           & IR diode cathode \\
+            $U_1$ & \Gnd                    & 3   & \texttt{3} &                & IR emitter       \\
+            $U_1$ & \Gnd                    & 4   & \texttt{4} & \leftharpoonup & IR collector     \\
+        \end{tabularx}
+    \end{threeparttable}
+    % \caption{WD - Pin mapping}
+\end{table}

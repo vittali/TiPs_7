@@ -1,0 +1,25 @@
+
+\begin{table}[H]
+    \centering
+    \begin{threeparttable}[b]
+        \begin{tabularx}{\linewidth}{ >{\hsize=0.15\hsize}X >
+                    {\hsize=0.15\hsize}X > {\hsize=0.25\hsize}X >{\hsize=3.45\hsize}X}
+            Id & Rank & Name             & Net description                                            \\
+            \midrule
+            1  & 1    & 3.3V             & voltage provided by \mu M                                  \\
+            3  & 4    & \texttt{ESS}     & enable SS                                                  \\
+            4  & 4    & \texttt{CON'}    & slave: are slave I2C bus and master I2C  connected ?       \\
+            5  & 4    & \texttt{ACK'}    & slave: is slave  ready to receive I2C data from master   ? \\
+            6  & 4    & \texttt{EOD}     & enable OD                                                  \\
+            7  & 4    & \neg \texttt{RS} & watchdog timer reset due to a software or hardware defect  \\
+            8  & 4    & \texttt{EWD}     & enable watchdog timer at the end of the startup code       \\
+            9  & 4    & \texttt{RWD}     & reset ("kick") watchdog time to prevent a reset of $U_1$   \\
+            10 & 4    & \texttt{SDA}     & master I2C data                                            \\
+            11 & 4    & \texttt{SCL}     & master I2C clock                                           \\
+        \end{tabularx}
+        \begin{tablenotes}
+            \item [-]
+        \end{tablenotes}
+    \end{threeparttable}
+    \caption{MA - Netlist}
+\end{table}

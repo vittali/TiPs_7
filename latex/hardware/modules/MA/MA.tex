@@ -1,0 +1,32 @@
+\section{Master Module (MA)}
+
+The MA module is composed of six modules:
+
+\begin{enumerate}
+    \item Display (DP): present process info to the user.
+    \item Watchdog Timer (WD): supervise program flow of \mu M.
+    \item Slave Switch (SS) : control power supply to Slave Module (SL).
+    \item \mu C Master (\mu M): run the water flow measurement firmware.
+    \item Bus Isolation (BI$_1$, BI$_2$): prevent back-powering via GPIO and I2C when SL is switched off.
+    \item Opto Switch Driver (OD): control power supply to the Optical Sensor Module (OS).
+\end{enumerate}
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.0\textwidth]{MA/MA}
+\end{figure}
+
+\input{hardware/modules/MA/MA_net}
+\input{hardware/modules/MA/DP/DP}
+\clearpage
+\input{hardware/modules/MA/WD/WD}
+\input{hardware/modules/MA/SS/SS}
+\input{hardware/modules/MA/uM/uM}
+\input{hardware/modules/MA/BI/BI}
+\input{hardware/modules/MA/OD/OD}
+
+
+
+
+

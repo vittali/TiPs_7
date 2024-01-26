@@ -1,0 +1,38 @@
+\subsection{\mu Slave Module (\mu S)}
+
+\mu S is a microcontroller that receives measurement data via the I2C bus and uploads this data to a public mqtt broker via
+GSM (GPRS).
+
+\subsubsection{Requirements}
+Originally, I planed to use only the  \cite{noauthor_arduino_2020} DK to realize the entire application.
+It turned out however, that I was unable to put the u-blox GSM module hosted on the DK into low power mode.
+While I was able to obtain some power consumption reduction via the Arduino GSM library, this was by far not enough
+for a low power application. I decided therefore to split the functionality across two DKs: one who does the actuals water
+flow measurement - the master -  and another separate GSM enabled module - the slave -
+to perform actual data transmission.
+The master would then control the slave power supply such that the slave and the radio module would only draw current
+during the relatively short period required for data transmission.
+Hence, the requirements for \mu S are:
+
+\begin{enumerate}
+    \item bidirectional data flow between master and slave.
+    \item GSM/GPRS compatible modem.
+\end{enumerate}
+
+The \cite{noauthor_arduino_2020} provides an I2C interface and fulfills both requirements.
+Another solution would have been to simply find a UART-compatible radio module (without additional microcontroller).
+While this would have resulted in a simpler and more compact circuit, I would have had to adapt the Arduino GSM library or write
+one from scratch.
+
+\subsubsection{Implementation}
+\input{hardware/modules/SL/uS/uS_BOM}
+\input{hardware/modules/SL/uS/uS_issues}
+
+\clearpage
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{SL/uS/uS}
+    \caption{\mu S - pin out \cite{noauthor_arduino_2020}}
+\end{figure}
+\input{hardware/modules/SL/uS/uS_pm}
+\clearpage

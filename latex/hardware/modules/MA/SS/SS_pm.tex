@@ -1,0 +1,29 @@
+\begin{table}[H]
+    \centering
+    \begin{threeparttable}[b]
+        \begin{tabularx}{\linewidth}{ >
+                    {\hsize=.25\hsize}X >
+                    {\hsize=0.5\hsize}X >
+                    {\hsize=.25\hsize}X  >
+                    {\hsize=.5\hsize}X >
+                    {\hsize=.25\hsize}X  >
+                    {\hsize=3\hsize}X
+            }
+                  & \multicolumn{4}{c}{Pin mapping} &                                                                   \\
+            \cmidrule(lr){3-6}
+            Id    & Net                             & Nb. & Name             & Type            & Function               \\
+            \midrule
+            $U_1$ & .5V                             & 1   & VIN              & \leftharpoonup  & input                  \\
+            $U_1$ & \Gnd                            & 2   & \texttt{GND}     & \Gnd            &                        \\
+            $U_1$ & .ESL                            & 3   & \texttt{EN/UVLO} & \rightharpoonup & switch enable          \\
+            $U_1$ &                                 & 4   & \texttt{CT}      &                 & left floating\tnote{1} \\
+            $U_1$ &                                 & 5   & \texttt{QOD}     &                 & left floating\tnote{2} \\
+            $U_1$ & .V\textsubscript{\mu S}         & 6   & \texttt{VOUT}    & \rightharpoonup & output                 \\
+        \end{tabularx}
+        \begin{tablenotes}
+            \item [1]  the Arduino is not a high current load for this switch.
+            \item [2] we don't care how fast the charge at the output decreases.
+        \end{tablenotes}
+    \end{threeparttable}
+
+\end{table}

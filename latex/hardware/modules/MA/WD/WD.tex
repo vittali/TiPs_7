@@ -1,0 +1,39 @@
+\subsection{Watchdog Module (WD) }
+\label{sec:WD}
+
+The Watchdog Module (WD) module prevents unexpected or intermittent software or hardware failures from stalling the microcontroller
+indefinitely. The module expects a timer reset signal from the microcontroller withing a given period. In the absence of this
+event, the watchdog circuit will reset the \mu C.
+
+\subsubsection{Requirements}
+
+The application runs only every second or so and the \mu C is
+in power-saving mode most of the time. There are no strict timing requirements but unnecessary watchdog resets must be avoided.
+This means that the watchdog circuit must be configurable for timeout periods of several seconds.
+This requirement excludes many available watchdog ICs. \par
+
+\begin{enumerate}
+    \item supply voltage  \SI{3.3}{\V}.
+    \item low power, low quiescent current.
+    \item timeout period of several seconds.
+\end{enumerate}
+
+For my application, I choose a timeout period of roughly \SI{8}{\s}. This prevents any possible false resets due to
+variations in program execution time that might be introduced by future software updates.
+
+\subsubsection{Implementation}
+
+
+\input{hardware/modules/MA/WD/WD_BOM}
+\input{hardware/modules/MA/WD/WD_issues}
+\clearpage
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.0\textwidth]{MA/WD/WD}
+    \caption{WD - schematic, from datasheet \cite{noauthor_tps3431_2018}}
+\end{figure}
+\input{hardware/modules/MA/WD/WD_pm}
+\clearpage
+
+
+
